@@ -6,19 +6,47 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        def recursiveTree(root):
-            if root == None:
-                return
+        # iterative solution
+        
+        # [7,2] 
+        # 
+        nodeQueue = [root]
+        currentNode = root
+        
+        while True:
+            if currentNode != None:
+                currentNode.left, currentNode.right = currentNode.right, currentNode.left
+                
+                if currentNode.left != None:
+                    print(currentNode.left.val)
+                    nodeQueue.append(currentNode.left)
+                
+                if currentNode.right != None:   
+                    print(currentNode.right.val)
+                    nodeQueue.append(currentNode.right)
+                
+                nodeQueue = nodeQueue[1:]
+                if nodeQueue:
+                    parentNode = nodeQueue[0]
+                    currentNode = parentNode
+                else:
+                    currentNode = None
+                
+                
                 
             
-            # if (root.left != None) and (root.right != None):
-            root.left, root.right = root.right, root.left
+            elif len(nodeQueue) == 0:
+                break;
             
-            recursiveTree(root.left)
-            recursiveTree(root.right)
-            return root
+            else:
+                break;
         
-        return recursiveTree(root)
+        return root
+                
+            
+            
+        
+        
             
             
         
