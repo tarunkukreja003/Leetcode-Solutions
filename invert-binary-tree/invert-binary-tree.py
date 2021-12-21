@@ -1,3 +1,4 @@
+import collections
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,47 +7,38 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # iterative solution
+        # bfs
+        # is it necessary that a node has both left and right child? - no single child can change postions
         
-        # [7,2] 
-        # 
-        nodeQueue = [root]
-        currentNode = root
+        if not root:
+            return root
+        queue = collections.deque([(root)])
         
-        while True:
-            if currentNode != None:
-                currentNode.left, currentNode.right = currentNode.right, currentNode.left
-                
-                if currentNode.left != None:
-                    print(currentNode.left.val)
-                    nodeQueue.append(currentNode.left)
-                
-                if currentNode.right != None:   
-                    print(currentNode.right.val)
-                    nodeQueue.append(currentNode.right)
-                
-                nodeQueue = nodeQueue[1:]
-                if nodeQueue:
-                    parentNode = nodeQueue[0]
-                    currentNode = parentNode
-                else:
-                    currentNode = None
-                
-                
-                
+        while queue:
+            currNode = queue.popleft()
+            if not currNode.left and not currNode.right:
+                continue
+            # there is only 1 child
+            if not currNode.left and currNode.right:
+                currNode.left = currNode.right
+                currNode.right = None
+                queue.append(currNode.left)
             
-            elif len(nodeQueue) == 0:
-                break;
+            elif not currNode.right and currNode.left:
+                currNode.right = currNode.left
+                currNode.left = None
+                queue.append(currNode.right)
             
-            else:
-                break;
+            
+            # if both the childs are there then swap them
+            elif currNode.right and currNode.left:
+                currNode.right, currNode.left = currNode.left, currNode.right
+                queue.append(currNode.left)
+                queue.append(currNode.right)
+        
         
         return root
-                
             
             
         
-        
-            
-            
         
