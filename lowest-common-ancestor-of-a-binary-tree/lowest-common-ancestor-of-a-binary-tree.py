@@ -23,25 +23,25 @@ class Solution:
         # if the left is null and the right is not then just return the value from right and vica-versa 
         # once we reach the root, it will return the not null subtree value
         
-        def findLCA(node, n1, n2):
+        # time complexity - O(n)
+        # space complexity - O(n) - because of recursion stack
+        
+        def findLCA(node):
             if node is None:
                 return 
-            if node.val == n1.val or node.val == n2.val:
+            if node is p or node is q:
                 return node
             
-            left = findLCA(node.left, n1, n2)
-            right = findLCA(node.right, n1, n2)
+            left = findLCA(node.left)
+            right = findLCA(node.right)
             
-            if (left is None) and (right is None):
-                return
-            elif (left is not None) and (right is not None):
+            if left and right:
                 return node
-            elif (left is not None) and (right is None):
-                return left
-            elif (left is None) and (right is not None):
-                return right
+            
+            return left or right
+            
         
-        return findLCA(root, p, q)
+        return findLCA(root)
             
         
         
