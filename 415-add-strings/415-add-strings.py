@@ -6,6 +6,10 @@ class Solution:
         9 + 9 = 18
         
         carry will be either 0 or 1
+        
+        
+        time complexity = O(max(len(num1), len(num2)))
+        space complexity = O(max(len(num1), len(num2)))
         """
         
         carry = 0
@@ -22,12 +26,10 @@ class Solution:
                 carry = 1
                 unitsDigit = sumOfNums % 10
                 sumOfNumsStr += str(unitsDigit)
-                # sumOfNumsStr += str(sumOfNums)
                 i -= 1
                 j -= 1
             else:
                 carry = 0
-                # print(sumOfNums)
                 sumOfNumsStr += str(sumOfNums)
                 i -= 1
                 j -= 1
@@ -39,12 +41,10 @@ class Solution:
             if sumOfNums > 9:
                 carry = 1
                 unitsDigit = sumOfNums % 10
-                # print(sumOfNumsStr)
                 sumOfNumsStr += str(unitsDigit)
                 i -= 1
             else:
                 carry = 0
-                # print(sumOfNums)
                 sumOfNumsStr += str(sumOfNums)
                 i -= 1
         
@@ -70,11 +70,29 @@ class Solution:
         
         k = len(sumOfNumsStr)-1
         
-        while k>=0:
-            finalSumStr += sumOfNumsStr[k]
-            k -= 1
+        # reverse the string to get the answer
         
-        return finalSumStr
+        # reverse it without using storing the result in any other string
+        
+        # we'll use two pointers, one will start from begin and other from end and keep swapping until both pointers meet
+        
+        sumOfNumsStr = [sumOfNumsStr[i] for i in range(len(sumOfNumsStr))]
+        # print(sumOfNumsStr)
+        
+        i = 0
+        j = len(sumOfNumsStr)-1
+        
+        while i<=j:
+            sumOfNumsStr[i], sumOfNumsStr[j] = sumOfNumsStr[j], sumOfNumsStr[i]
+            i += 1
+            j -= 1
+            
+        # print()
+#         while k>=0:
+#             finalSumStr += sumOfNumsStr[k]
+#             k -= 1
+        
+        return "".join(sumOfNumsStr)
             
             
             
