@@ -27,16 +27,15 @@ class Solution:
         self.inorderTraversal(root.right, self.sortedArray)
         
     def constructBalancedBST(self, low, high):
-        if low > high:
-            return
-        mid = low + (high - low) // 2
-        
-        rootNode = TreeNode(self.sortedArray[mid])
-        rootNode.left = self.constructBalancedBST(low, mid-1)
-        rootNode.right = self.constructBalancedBST(mid+1, high)
-        
-        return rootNode
-        
+        if low <= high:
+            mid = low + (high - low) // 2
+
+            rootNode = TreeNode(self.sortedArray[mid])
+            rootNode.left = self.constructBalancedBST(low, mid-1)
+            rootNode.right = self.constructBalancedBST(mid+1, high)
+
+            return rootNode
+
     def balanceBST(self, root: TreeNode) -> TreeNode:
         self.sortedArray = []
         self.inorderTraversal(root, self.sortedArray)
