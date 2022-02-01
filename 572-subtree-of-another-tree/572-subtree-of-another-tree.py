@@ -5,45 +5,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSubtree(self, a, b):
-        if not b:
-            return True
-        
-        def checkTree(root1, root2):
-            if not root1 and not root2:
-                return True
-            elif root1 and not root2 or root2 and not root1:
-                return False
-            
-            if root1.val != root2.val:
-                return False
-            
-            return checkTree(root1.left, root2.left) and checkTree(root1.right, root2.right)
-        
-        def dfs(s, t):
-            if not s:
-                return False
-            
-            if s.val == t.val and checkTree(s, t):
-                return True
-            
-            return dfs(s.left, t) or dfs(s.right, t)
-            
-        return dfs(a, b)
-    
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         
         
         """
         
-        isIdentical(root, subRoot):
-            
-            if root.val == subRoot.val and isIdentical(root.left, subRoot.left) and isIdentical(root.right, subRoot.right)
-        
         
         travel down the tree until we find val = subroot.val
         
-        after finding the node traverse both the trees simultaneously, if any node is not equal then return and travel in the tree to find another subroot
+        after finding the node traverse both the trees simultaneously, if any node is not equal then return false and travel further down in the tree to find another subroot
         
         if subroot has reached none and root has not or vica-versa then return False
         
@@ -58,7 +28,7 @@ class Solution:
         """
         
         def findSubrootVal(node, subRoot):
-            if not node:
+            if node is None:
                 return False
                 
             if node.val == subRoot.val and isMatch(node, subRoot):
@@ -68,7 +38,7 @@ class Solution:
             return findSubrootVal(node.left, subRoot) or findSubrootVal(node.right, subRoot)
         
         def isMatch(node, subNode):
-            if not node and not subNode:
+            if node is None and subNode is None:
                 return True
             
             if (not node and subNode) or (not subNode and node):
