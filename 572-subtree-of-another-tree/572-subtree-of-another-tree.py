@@ -57,15 +57,15 @@ class Solution:
         
         """
         
-        def findSubrootVal(node, subNode):
+        def findSubrootVal(node, subRoot):
             if not node:
                 return False
                 
-            if node.val == subNode.val and isMatch(node, subNode):
+            if node.val == subRoot.val and isMatch(node, subRoot):
                 return True
                 
             
-            return findSubrootVal(node.left, subNode) or findSubrootVal(node.right, subNode)
+            return findSubrootVal(node.left, subRoot) or findSubrootVal(node.right, subRoot)
         
         def isMatch(node, subNode):
             if not node and not subNode:
