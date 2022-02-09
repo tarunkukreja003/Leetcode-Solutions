@@ -16,6 +16,19 @@ class Solution:
         
         if s and goal are the same strings return True
         
+        
+        time complexity -> 
+        if you visit a character only once then only it is O(n)
+        
+        to check the rest of the string it is linear
+        
+        1 + 2 + 3 -> O(n^2)
+        
+        
+        for KMP we'll have to find the longest proper prefix in s which is also a suffix in goal
+        
+        s + goal -> KMP on this
+        
         """
         
         if len(s) != len(goal):
@@ -27,18 +40,50 @@ class Solution:
                     return False
             return True
             
-        prefixS = ""
+#         prefixS = ""
         
-        for i in range(len(s)):
-            prefixS = s[:i+1]
-            lenPrefix = i+1
-            if prefixS == goal[-lenPrefix:]:
-                booleanVal = isEqualString(s[lenPrefix:], goal[:-lenPrefix])
-                if booleanVal:
-                    return True
-                else:
-                    return False
-        return False
+#         for i in range(len(s)):
+#             prefixS = s[:i+1]
+#             lenPrefix = i+1
+#             if prefixS == goal[-lenPrefix:]:
+#                 booleanVal = isEqualString(s[lenPrefix:], goal[:-lenPrefix])
+#                 if booleanVal:
+#                     return True
+#                 else:
+#                     return False
+#         return False
             
                 
+        stringForKMP = s + goal
+        
+        lps = [0 for _ in range(len(stringForKMP))]
+        lps[0] = 0
+        
+        j = 0
+        i = 1
+        
+        while i < len(stringForKMP):
+            if stringForKMP[i] == stringForKMP[j]:
+                j += 1
+                lps[i] = j
+                i += 1
+            else:
+                
+                if j > 0:
+                    j = lps[j-1]
+                else:
+                    lps[i] = 0
+                    i += 1
+        
+        
+        if lps[-1] == 0:
+            return False
+        
+        lenPrefix = lps[-1]
+        
+        booleanVal = isEqualString(s[lenPrefix:], goal[:-lenPrefix])
+        if booleanVal:
+            return True
+        else:
+            return False
         
