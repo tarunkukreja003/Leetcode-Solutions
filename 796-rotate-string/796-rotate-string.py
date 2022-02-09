@@ -29,6 +29,11 @@ class Solution:
         
         s + goal -> KMP on this
         
+        
+        KMP time complexity -> O(2N) n is the length of s or goal
+        
+        space complexity -> O(2N)
+        
         """
         
         if len(s) != len(goal):
@@ -79,9 +84,9 @@ class Solution:
         if lps[-1] == 0:
             return False
         
-        lenPrefix = lps[-1]
+        lenProperPrefixSuffix = lps[-1]
         
-        booleanVal = isEqualString(s[lenPrefix:], goal[:-lenPrefix])
+        booleanVal = isEqualString(s[lenProperPrefixSuffix:], goal[:-lenProperPrefixSuffix])
         if booleanVal:
             return True
         else:
