@@ -72,6 +72,14 @@ class Solution:
         2:0
         }
         
+        
+        [2,4]
+        n*2 ki frequency 0 nhi ho sakti
+        {
+        2:0
+        4:0
+        
+        }
         if the twice value is not there in the hashmap then just continue
         
         
@@ -87,45 +95,11 @@ class Solution:
         
         for n in sorted(changed):
             v = n*2
-            if numbers.get(n, 0) > 0 and numbers.get(v, 0) > 0:
+            if numbers[n] > 0 and numbers[v] > 0:
                 original.append(n)
                 numbers[n] -= 1
                 numbers[v] -= 1
             elif n // 2 not in numbers or n % 2 == 1:
                 return []
         return original
-        
-#         frequencyHashMap = collections.Counter(changed)
-#         originalArray = []
-        
-        
-        
-#         for element in sorted(changed):
-#             twiceVal = 2*element
-#             if element == 0 and element not in originalArray:
-#                 if frequencyHashMap[element] > 1:
-#                     # in this case twiceVal == element
-#                     print("inside 0")
-#                     originalArray.append(element)
-#                     frequencyHashMap[element] -= 2
-#                 else:
-#                     continue
-            
-               
-            
-#             elif twiceVal in frequencyHashMap and frequencyHashMap[twiceVal] > 0 and frequencyHashMap[element] > 0 and element not in originalArray:
-#                 print("outside: ", element)
-#                 originalArray.append(element)
-#                 frequencyHashMap[twiceVal] -= 1
-#                 frequencyHashMap[element] -= 1
-#             else:
-#                 continue
-        
-#         if len(originalArray) == (len(changed) / 2):
-#             return originalArray
-#         else:
-#             return []
-                
-        
-        
         
