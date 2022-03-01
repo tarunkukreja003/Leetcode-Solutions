@@ -19,9 +19,6 @@ class Solution:
             
         if root.val is None:
             return 0
-        if root.val == 0:
-            findRootToLeafNumbersSum(root.left,0)
-            findRootToLeafNumbersSum(root.right,0)
         else:
             findRootToLeafNumbersSum(root,0)
         
